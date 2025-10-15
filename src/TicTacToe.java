@@ -123,7 +123,6 @@ public class TicTacToe {
         return false;
     }
 
-    // Inside the TicTacToe class
 
     public void playGame() throws InterruptedException {
         Scanner input = new Scanner(System.in);
@@ -134,18 +133,19 @@ public class TicTacToe {
             this.prettyPrintGameBoard();
             System.out.println();
 
-            // FIX: Differentiate between Human and CPU turns
             if (currentPlayer.isHuman()) {
                 currentPlayer.makeMove(this, input);
             } else {
                 System.out.println(currentPlayer.getName() + " is thinking...");
-                Thread.sleep(1000);
+                System.out.println();
+                Thread.sleep(1500);
                 Player opponent = (currentPlayer == p1) ? p2 : p1;
                 currentPlayer.cpuMove(this, opponent);
             }
 
             if (this.checkIfWon(currentPlayer)) {
                 System.out.println(currentPlayer.getName() + " has won the game! \uD83E\uDD73 ");
+                System.out.println();
                 this.prettyPrintGameBoard();
                 return;
             }
@@ -154,6 +154,7 @@ public class TicTacToe {
 
             if (rounds == ROWS * COLS) {
                 System.out.println("Nobody wins! It's a draw.");
+                System.out.println();
                 this.prettyPrintGameBoard();
                 return;
             }
@@ -198,9 +199,9 @@ public class TicTacToe {
 
         while (chosen == false) {
             System.out.println("Choose game mode: ");
-            System.out.println("1 : 1 vs 1 ");
-            System.out.println("2 : 1 vs AI ");
-            System.out.println("3 : AI vs AI ");
+            System.out.println("[1] 1 vs 1 ");
+            System.out.println("[2] 1 vs AI ");
+            System.out.println("[3] AI vs AI ");
 
             choice = Integer.parseInt(input.nextLine());
 

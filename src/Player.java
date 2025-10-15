@@ -79,7 +79,6 @@ public class Player {
         }
     }
 
-
     public void makeMove(TicTacToe ttt, Scanner input) {
         while (true) {
             System.out.print(this.name + ", make your move (choose a number 1-9): ");
@@ -89,12 +88,12 @@ public class Player {
             try {
                 choice = Integer.parseInt(line);
             } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid input. Please enter a number 1 - 9.");
+                System.out.println("Invalid input. Please enter a number 1 - 9.");
                 continue;
             }
 
             if (choice < 1 || choice > 9) {
-                System.out.println("❌ Invalid choice. Please choose a number between 1 and 9.");
+                System.out.println("Invalid choice. Please choose a number between 1 and 9.");
                 continue;
             }
 
@@ -106,7 +105,7 @@ public class Player {
             if (moveWasSuccessful) {
                 break;
             } else {
-                System.out.println("❌ That spot is already taken. Try again.");
+                System.out.println("That spot is already taken. Try again.");
             }
         }
     }
