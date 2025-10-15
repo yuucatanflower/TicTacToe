@@ -18,6 +18,23 @@ public class TicTacToe {
     private Player p1;
     private Player p2;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+
+    private String getColoredSymbol(char symbol) {
+        switch (symbol) {
+            case 'X':
+                return ANSI_RED + "X" + ANSI_RESET;
+            case 'O':
+                return ANSI_BLUE + "O" + ANSI_RESET;
+            default:
+                // Return the numbers '1'-'9' without any color
+                return String.valueOf(symbol);
+        }
+    }
+
+
     public TicTacToe(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
@@ -52,7 +69,12 @@ public class TicTacToe {
 
     private void prettyPrintGameBoard() {
         for (int i = 0; i < ROWS; i++) {
-            System.out.println(gameBoard[i][0] + " | " + gameBoard[i][1] + " | " + gameBoard[i][2]+" ");
+            // Call getColoredSymbol for each cell
+            String s0 = getColoredSymbol(gameBoard[i][0]);
+            String s1 = getColoredSymbol(gameBoard[i][1]);
+            String s2 = getColoredSymbol(gameBoard[i][2]);
+
+            System.out.println(s0 + " | " + s1 + " | " + s2 + " ");
             if (i < ROWS - 1) {
                 System.out.println("--+---+--");
             }
@@ -103,7 +125,7 @@ public class TicTacToe {
 
     // Inside the TicTacToe class
 
-    public void playGame() {
+    public void playGame() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Player currentPlayer = p1;
         int rounds = 0;
@@ -117,7 +139,7 @@ public class TicTacToe {
                 currentPlayer.makeMove(this, input);
             } else {
                 System.out.println(currentPlayer.getName() + " is thinking...");
-
+                Thread.sleep(1000);
                 Player opponent = (currentPlayer == p1) ? p2 : p1;
                 currentPlayer.cpuMove(this, opponent);
             }
@@ -141,11 +163,13 @@ public class TicTacToe {
     }
 
 
-    public static void main(String[] args) {
 
 
-        Player p1 = new Player('X', "Player1",false);
-        Player p2 = new Player('O', "Player2",true);
+    public static void main(String[] args) throws InterruptedException {
+
+
+        Player p1 = new Player('X', "Arsen",true);
+        Player p2 = new Player('O', "Max",true);
 
         TicTacToe ttt = new TicTacToe(p1, p2);
 
