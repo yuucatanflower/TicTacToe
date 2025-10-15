@@ -10,7 +10,7 @@ public class Player {
 
     private boolean isHuman;
 
-    public Player(char symbol, String name,  boolean isHuman) {
+    public Player(String name, char symbol, boolean isHuman) {
         this.symbol = symbol;
         this.name = name;
         this.isHuman = isHuman;
@@ -30,7 +30,7 @@ public class Player {
 
     public void cpuMove(TicTacToe ttt, Player opponent) {
 
-        if(isHuman){
+        if (isHuman) {
             return;
         }
 
@@ -82,19 +82,31 @@ public class Player {
 
     public void makeMove(TicTacToe ttt, Scanner input) {
         while (true) {
-            System.out.print(this.name + " make your move (choose a number): ");
-            int choice = input.nextInt();
-            if (choice < 1 || choice > 9) {
+            System.out.print(this.name + ", make your move (choose a number 1-9): ");
+            String line = input.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(line);
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Invalid input. Please enter a number 1 - 9.");
                 continue;
             }
+
+            if (choice < 1 || choice > 9) {
+                System.out.println("❌ Invalid choice. Please choose a number between 1 and 9.");
+                continue;
+            }
+
             int row = (choice - 1) / 3;
             int col = (choice - 1) % 3;
 
             boolean moveWasSuccessful = ttt.placeTic(this, row, col);
+
             if (moveWasSuccessful) {
                 break;
             } else {
-                System.out.println("That spot is already taken. Try again.");
+                System.out.println("❌ That spot is already taken. Try again.");
             }
         }
     }
