@@ -197,10 +197,10 @@ public class TicTacToe {
 
 
         while (chosen == false) {
-            System.out.println("Choose game mode: (, 2 -- 1vsAI, 3 -- AIvsAI)");
-            System.out.print("1 : 1 vs 1 ");
-            System.out.print("2 : 1 vs AI ");
-            System.out.print("3 : AI vs AI ");
+            System.out.println("Choose game mode: ");
+            System.out.println("1 : 1 vs 1 ");
+            System.out.println("2 : 1 vs AI ");
+            System.out.println("3 : AI vs AI ");
 
             choice = Integer.parseInt(input.nextLine());
 
