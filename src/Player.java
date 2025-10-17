@@ -5,11 +5,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
-    private char symbol;
-    private String name;
-
-    private boolean isHuman;
-
+    private final char symbol;
+    private final String name;
+    private final boolean isHuman;
+    
     public Player(String name, char symbol, boolean isHuman) {
         this.symbol = symbol;
         this.name = name;

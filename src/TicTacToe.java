@@ -3,37 +3,26 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    /*
-     * Define instance variables
-     *
-     * Define a constructor
-     *
-     * Define public and private methods
-     *
-     * */
     public static final int ROWS = 3;
     public static final int COLS = 3;
 
-    private char[][] gameBoard;
-    private Player p1;
-    private Player p2;
+    private final char[][] gameBoard;
+    private final Player p1;
+    private final Player p2;
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLUE = "\u001B[34m";
 
     private String getColoredSymbol(char symbol) {
-        switch (symbol) {
-            case 'X':
-                return ANSI_RED + "X" + ANSI_RESET;
-            case 'O':
-                return ANSI_BLUE + "O" + ANSI_RESET;
-            default:
-                // Return the numbers '1'-'9' without any color
-                return String.valueOf(symbol);
-        }
+        return switch (symbol) {
+            case 'X' -> ANSI_RED + "X" + ANSI_RESET;
+            case 'O' -> ANSI_BLUE + "O" + ANSI_RESET;
+            default ->
+                // return numbers 1-9 without color
+                    String.valueOf(symbol);
+        };
     }
-
 
     public TicTacToe(Player p1, Player p2) {
         this.p1 = p1;
@@ -123,7 +112,6 @@ public class TicTacToe {
         return false;
     }
 
-
     public void playGame() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Player currentPlayer = p1;
@@ -167,7 +155,7 @@ public class TicTacToe {
         System.out.print("What is your symbol? ( O / X ): ");
         boolean chosen = false;
         char result = ' ';
-        while (chosen == false) {
+        while (!chosen) {
             result = input.next().toUpperCase().charAt(0);
             if (result == 'O' || result == 'X') {
                 chosen = true;
@@ -190,18 +178,20 @@ public class TicTacToe {
     public static void main(String[] args) throws InterruptedException {
         int choice = 0;
         boolean chosen = false;
-        //Player p1 = new Player('X', "Arsen",false);
+
+        //Player p1 = new Player('X', "Xam",false);
         //Player p2 = new Player('O', "Max",false);
+
         Scanner input = new Scanner(System.in);
         Player p1 = null;
         Player p2 = null;
 
 
-        while (chosen == false) {
+        while (!chosen) {
             System.out.println("Choose game mode: ");
             System.out.println("[1] 1 vs 1 ");
-            System.out.println("[2] 1 vs AI ");
-            System.out.println("[3] AI vs AI ");
+            System.out.println("[2] 1 vs CPU ");
+            System.out.println("[3] CPU vs CPU ");
 
             choice = Integer.parseInt(input.nextLine());
 
@@ -214,12 +204,12 @@ public class TicTacToe {
                 case 2:
                     chosen = true;
                     p1 = new Player(askForName(input, 1), askForSymbol(input), true);
-                    p2 = new Player("AI Player 2", p1.getSymbol() == 'X' ? 'O' : 'X', false);
+                    p2 = new Player(" CPU ", p1.getSymbol() == 'X' ? 'O' : 'X', false);
                     break;
                 case 3:
                     chosen = true;
-                    p1 = new Player("AI Player 1", 'X', false);
-                    p2 = new Player("AI Player 2", 'O', false);
+                    p1 = new Player("CPU 1", 'X', false);
+                    p2 = new Player("CPU 2", 'O', false);
                     break;
                 default:
                     System.out.println("Invalid choice.");
@@ -229,7 +219,5 @@ public class TicTacToe {
         TicTacToe ttt = new TicTacToe(p1, p2);
 
         ttt.playGame();
-
-
     }
 }
