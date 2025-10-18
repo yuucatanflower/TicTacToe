@@ -8,7 +8,11 @@ public class Player {
     private final char symbol;
     private final String name;
     private final boolean isHuman;
-    
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN_UNDERLINE = "\u001b[4;36m";
     public Player(String name, char symbol, boolean isHuman) {
         this.symbol = symbol;
         this.name = name;
@@ -80,7 +84,7 @@ public class Player {
 
     public void makeMove(TicTacToe ttt, Scanner input) {
         while (true) {
-            System.out.print(this.name + ", make your move (choose a number 1-9): ");
+            System.out.print(this.colorName() + ", make your move" +ANSI_CYAN_UNDERLINE + "(choose a number 1-9): "+ANSI_RESET);
             String line = input.nextLine();
             int choice;
 
@@ -107,5 +111,9 @@ public class Player {
                 System.out.println("That spot is already taken. Try again.");
             }
         }
+    }
+
+    public String colorName(){
+        return this.getSymbol()=='X'?ANSI_RED + this.getName() +ANSI_RESET : ANSI_BLUE + this.getName() +ANSI_RESET;
     }
 }

@@ -13,6 +13,7 @@ public class TicTacToe {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN_UNDERLINE = "\u001b[4;36m";
 
     private String getColoredSymbol(char symbol) {
         return switch (symbol) {
@@ -132,7 +133,7 @@ public class TicTacToe {
             }
 
             if (this.checkIfWon(currentPlayer)) {
-                System.out.println(currentPlayer.getName() + " has won the game! \uD83E\uDD73 ");
+                System.out.println(currentPlayer.colorName() + " has won the game! ");
                 System.out.println();
                 this.prettyPrintGameBoard();
                 return;
@@ -204,12 +205,14 @@ public class TicTacToe {
                 case 2:
                     chosen = true;
                     p1 = new Player(askForName(input, 1), askForSymbol(input), true);
-                    p2 = new Player(" CPU ", p1.getSymbol() == 'X' ? 'O' : 'X', false);
+                    p2 = new Player(p1.getSymbol()=='X'? ANSI_BLUE+"CPU BLUE"+ANSI_RESET : ANSI_RED+"CPU RED"+ANSI_RESET,
+                            p1.getSymbol() == 'X' ? 'O' : 'X',
+                            false);
                     break;
                 case 3:
                     chosen = true;
-                    p1 = new Player("CPU 1", 'X', false);
-                    p2 = new Player("CPU 2", 'O', false);
+                    p1 = new Player(ANSI_RED+"CPU RED"+ANSI_RESET, 'X', false);
+                    p2 = new Player(ANSI_BLUE+"CPU BLUE"+ANSI_RESET, 'O', false);
                     break;
                 default:
                     System.out.println("Invalid choice.");
