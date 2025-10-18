@@ -27,6 +27,10 @@ public class Player {
         return name;
     }
 
+    public String colorName(){
+        return this.getSymbol()=='X'?ANSI_RED + this.getName() +ANSI_RESET : ANSI_BLUE + this.getName() +ANSI_RESET;
+    }
+
     public boolean isHuman() {
         return isHuman;
     }
@@ -84,7 +88,8 @@ public class Player {
 
     public void makeMove(TicTacToe ttt, Scanner input) {
         while (true) {
-            System.out.print(this.colorName() + ", make your move" +ANSI_CYAN_UNDERLINE + "(choose a number 1-9): "+ANSI_RESET);
+            System.out.print(this.colorName() + ", make your move " +ANSI_CYAN_UNDERLINE + "(choose a number 1-9)"+ANSI_RESET+": ");
+            System.out.println();
             String line = input.nextLine();
             int choice;
 
@@ -113,7 +118,4 @@ public class Player {
         }
     }
 
-    public String colorName(){
-        return this.getSymbol()=='X'?ANSI_RED + this.getName() +ANSI_RESET : ANSI_BLUE + this.getName() +ANSI_RESET;
-    }
 }

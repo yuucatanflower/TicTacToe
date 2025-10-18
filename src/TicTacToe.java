@@ -164,6 +164,7 @@ public class TicTacToe {
                 System.out.print("Invalid symbol. Use O or X.");
             }
         }
+        System.out.println();
         return result;
     }
 
@@ -173,6 +174,8 @@ public class TicTacToe {
             System.out.println("What is player's #" + playerNumber + " name?");
             result = input.next();
         }
+        System.out.println();
+
         return result;
     }
 
